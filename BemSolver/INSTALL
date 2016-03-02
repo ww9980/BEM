@@ -1,0 +1,37 @@
+installation on ubuntu 11.10
+Packages to install:
+sudo apt-get install cmake g++ libfftw3-dev liblapack-dev subversion
+
+root-system (version 5.33.01):
+
+svn co http://root.cern.ch/svn/root/trunk root
+or
+
+svn co http://root.cern.ch/svn/root/tags/v5-33-01 root-5.33.01
+sudo apt-get install libXft-dev libXext-dev libqt4-dev libmysqlclient-dev libiodbc2-dev libfftw3-dev libgraphviz-dev python python-dev ruby ruby-dev libxml2-dev libgsl0-dev libxpm-dev gcc g++ make binutils libx11-dev libxpm-dev libxft-dev libxext-dev cmake gsl-bin libgsl0-dev liblzma2 liblzma-dev libgmp3c2 libgmp3-dev libpcre3 libpcre3-dev lib1g zlib1g-dev subversion dpkg-dev make g++ gcc binutils libx11-dev libxpm-dev libxft-dev libxext-dev gfortran openssl libpcre3-dev xlibmesa-glu-dev libglew1.5-dev libftgl-dev libmysqlclient-dev libfftw3-dev cfitsio-dev graphviz-dev libavahi-compat-libdnssd-dev libldap2-dev python-dev libxml2-dev libssl-dev libkrb5-dev libgsl0-dev
+ 
+
+./configure linuxx8664gcc \
+--prefix=/usr \
+--with-x11-libdir=/usr/lib/x86_64-linux-gnu \
+--with-xft-libdir=/usr/lib/x86_64-linux-gnu \
+--with-xext-libdir=/usr/lib/x86_64-linux-gnu \
+--disable-builtin-zlib \
+--enable-explicitlink --enable-gdml \
+--enable-qt --enable-qtgsi --enable-ruby \
+--enable-minuit2 --enable-roofit \
+--enable-soversion --enable-table --enable-unuran \
+--fail-on-missing
+
+make 
+sudo make install
+
+cd /etc/ld.so.conf.d/
+sudo echo /usr/lib/root >root.conf
+sudo ldconfig
+to compile bemsolver in directory type:
+cd BemSolver
+rm CMakeCache.txt
+cmake .
+./build_dict_cxx.sh 
+make
